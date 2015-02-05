@@ -1,0 +1,48 @@
+{namespace coleslaw.theme.simple}
+
+{template index}
+<div class="row">
+  <div class="col-md-8">
+    <h1 class="page-header">{$index.title}</h1>
+    {foreach $obj in $index.content}
+    <h2><a href="{$config.domain}/{$obj.url}">{$obj.title}</a></h2>
+    <p class="date-posted">posted on {$obj.date}</p>
+    {$obj.text |noAutoescape}
+    {/foreach}
+    <div id="relative-nav">
+      <ul class="pager">
+        {if $prev} <li class="previous"><a href="{$config.domain}/{$prev.url}">Previous</a></li> {/if}
+        {if $next} <li class="next"><a href="{$config.domain}/{$next.url}">Next</a></li> {/if}
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-4">
+    {if $months}
+    <div class="well">
+      <h4>Months</h4>
+      <ul>
+        {foreach $month in $months}
+        <li class="list-unstyled">
+          <a href="{$config.domain}/{$month.url}">{$month.name}</a>{nil}
+        </li>
+        {/foreach}
+      </ul>
+    </div>
+    {/if}
+    {if $tags}
+    <div class="well">
+      <h4>Tag</h4>
+      <ul>
+        {foreach $tag in $tags}
+        <li class="list-unstyled">
+          <a href="{$config.domain}/{$tag.url}">{$tag.name}</a>{nil}
+        </li>
+        {/foreach}
+      </ul>
+    </div>
+  </div>
+  {/if}
+  
+</div>
+</div>
+{/template}

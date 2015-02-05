@@ -1,0 +1,80 @@
+{namespace coleslaw.theme.simple}
+
+{template base}
+<!DOCTYPE html>{\n}
+<html lang="{$config.lang}">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset={$config.charset}">
+    <title>{$config.title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{$config.domain}/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="{$config.domain}/css/custom.css" rel="stylesheet" media="screen">
+    <link rel="alternate" href="{$config.domain}/rss.xml" type="application/rss+xml" />
+    {if $injections.head}
+    {foreach $injection in $injections.head}
+    {$injection |noAutoescape}
+    {/foreach}
+    {/if}
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{$config.domain}">{$config.title}</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            {foreach $link in $config.sitenav}
+            <li><a href="{$link.url}">{$link.name}</a></li>
+            {/foreach}
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+    </nav>
+
+
+    <div class="container">
+      {$raw |noAutoescape}
+    </div>
+
+    {if $injections.body}
+    {foreach $injection in $injections.body}
+    <div class="container">
+      {$injection |noAutoescape}
+    </div>
+    {/foreach}
+    {/if}
+
+    <div class="container">
+      <hr>
+      <p class="fineprint">Unless otherwise credited all material
+        {if $config.license}
+        {$config.license}
+        {else}
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">
+          <img alt="Creative Commons License" style="border-width:0" src="{$config.domain}/img/cc-by-sa.png" />
+        </a>
+        {/if}
+        by {$config.author}
+        <a id="coleslaw-logo" href="https://github.com/redline6561/coleslaw">
+          <img src="{$config.domain}/img/logo_small.jpg" alt="Coleslaw
+                                                              logo" />
+        </a>
+      </p>
+    </div>
+
+    <script src="{$config.domain}/js/jquery.js"></script>
+    <script src="{$config.domain}/js/bootstrap.js"></script>    
+  </body>
+</html>
+{/template}
