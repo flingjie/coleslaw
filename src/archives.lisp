@@ -2,7 +2,7 @@
 
 ;;; Archives
 
-(defclass archive-index () ())
+(defclass archive-index (index) ())
 
 (defmethod discover ((doc-type (eql (find-class 'archive-index))))
   (let ((content (by-date (find-all 'post))))
