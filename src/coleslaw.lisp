@@ -16,11 +16,11 @@ in REPO-DIR. Optionally, OLDREV is the revision prior to the last push."
 
 (defun load-content ()
   "Load all content stored in the blog's repo."
-  (do-subclasses (ctype content)
-    (discover ctype))
+  (ado-subclasses (content)
+    (discover it))
   (update-content-metadata)
-  (do-subclasses (itype index)
-    (discover itype)))
+  (ado-subclasses (index)
+    (discover it)))
 
 (defun compile-blog (staging)
   "Compile the blog to a STAGING directory as specified in .coleslawrc."
@@ -32,10 +32,10 @@ in REPO-DIR. Optionally, OLDREV is the revision prior to the last push."
                        (merge-pathnames "static" (repo-dir *config*))))
       (when (probe-file dir)
         (run-program "rsync --delete -raz ~a ." dir)))
-    (do-subclasses (ctype content)
-      (publish ctype))
-    (do-subclasses (itype index)
-      (publish itype))
+    (ado-subclasses (content)
+      (publish it))
+    (ado-subclasses (index)
+      (publish it))
     (update-symlink "index.html" "1.html")))
 
 (defgeneric deploy (staging)

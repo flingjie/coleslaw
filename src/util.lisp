@@ -11,20 +11,20 @@
     (append subclasses (loop for subclass in subclasses
                           nconc (all-subclasses subclass)))))
 
-(defmacro do-subclasses ((var class) &body body)
+(defmacro ado-subclasses ((class) &body body)
   "Iterate over the subclasses of CLASS performing BODY with VAR
 lexically bound to the current subclass."
   (alexandria:with-gensyms (klasses)
     `(let ((,klasses (all-subclasses (find-class ',class))))
-       (loop for ,var in ,klasses do ,@body))))
+       (loop for it in ,klasses do ,@body))))
 
-(defmacro do-files ((var path &optional extension) &body body)
+(defmacro ado-files ((path &optional extension) &body body)
   "For each file under PATH, run BODY. If EXTENSION is provided, only run
 BODY on files that match the given extension."
   (alexandria:with-gensyms (extension-p)
     `(flet ((,extension-p (file)
               (string= (pathname-type file) ,extension)))
-       (cl-fad:walk-directory ,path (lambda (,var) ,@body)
+       (cl-fad:walk-directory ,path (lambda (it) ,@body)
                               :follow-symlinks nil
                               :test (if ,extension
                                         #',extension-p

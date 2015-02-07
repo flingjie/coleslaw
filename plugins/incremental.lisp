@@ -45,8 +45,8 @@
        do (update-content status file-path))
     (update-content-metadata)
     ;; Discover's :before method will delete any possibly outdated indexes.
-    (do-subclasses (itype index)
-      (discover itype))
+    (do-subclasses (index)
+      (discover it))
     (cl-store:store coleslaw::*site* db-file)))
 
 (defun update-content (status path)

@@ -32,7 +32,7 @@ function that takes a DOCUMENT and returns NIL or a STRING for template insertio
 
 (defun compile-theme (theme)
   "Locate and compile the templates for the given THEME."
-  (do-files (file (app-path "themes/~a/" theme) "tmpl")
-    (compile-template :common-lisp-backend file))
-  (do-files (file (app-path "themes/") "tmpl")
-    (compile-template :common-lisp-backend file)))
+  (ado-files ((app-path "themes/~a/" theme) "tmpl")
+    (compile-template :common-lisp-backend it))
+  (ado-files ((app-path "themes/") "tmpl")
+    (compile-template :common-lisp-backend it)))
